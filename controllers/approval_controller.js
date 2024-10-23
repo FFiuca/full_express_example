@@ -76,3 +76,5 @@ exports.get_approval = async (req, res, next)=>{
         next(error)
     }
 }
+
+console.log('approval controller initiated')

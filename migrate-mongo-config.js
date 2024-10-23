@@ -1,4 +1,13 @@
 // In this file you can configure migrate-mongo
+const dotenv = require('dotenv');
+if (process.env.NODE_ENV == "test"){
+  dotenv.config({
+      path: './.env.test',
+  })
+}else{
+  dotenv.config()
+}
+
 
 const config = {
   mongodb: {
@@ -6,7 +15,7 @@ const config = {
     url: process.env.MONGO_URI,
 
     // TODO Change this to your database name:
-    databaseName: "lnk",
+    databaseName: process.env.MONGO_DB,
 
     options: {
       useNewUrlParser: true, // removes a deprecation warning when connecting
