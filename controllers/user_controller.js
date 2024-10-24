@@ -7,7 +7,7 @@ const user_get = async (req, res, next) =>{
         const data = await user_get_uc(param)
         console.log('sini3')
 
-        return res.status(201).json({data : data})
+        return res.status(200).json({data : data})
     }catch(error){
         console.log('sini4')
         next(error)

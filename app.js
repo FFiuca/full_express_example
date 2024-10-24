@@ -1,8 +1,10 @@
 const dotenv = require('dotenv');
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 const guest_router = require('./routes/guest')
 const user_router = require('./routes/user')
+
 
 if (process.env.NODE_ENV == "test"){
     dotenv.config({
@@ -16,6 +18,8 @@ console.log(process.env.NODE_ENV, process.env.MONGO_URI, process.env.MONGO_DB)
 const {error_handler} = require('./middlewares/error_middleware')
 
 const app = express()
+
+app.use(cors())
 app.use(express.json())
 
 mongoose.connect(process.env.MONGO_URI+'/'+process.env.MONGO_DB, {

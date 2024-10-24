@@ -7,7 +7,11 @@ const approval_controller = require('../controllers/approval_controller')
 router.use(auth_handler)
 
 router.get('/', async (req, res)=>{
-    return res.send('Logged in')
+    return res.status(200).json({
+        data : {
+            user_id :  req.user_id,
+        }
+    })
 })
 
 router.get('/user', user_controller.user_get)
