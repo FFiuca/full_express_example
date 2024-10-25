@@ -30,8 +30,8 @@ mongoose.connect(process.env.MONGO_URI+'/'+process.env.MONGO_DB, {
 .catch((err)=> console.log(err))
 
 // ini konsepnya middleware gk kayak go fiber atau wrapper python yang punya before after logic. di express tergantung posisi set  app.use nya dimana, misal app.user(error_handler), dia sebagai after logic
-app.use('/guest', guest_router)
-app.use('/user', user_router)
+app.use('/lnk/be/guest', guest_router)
+app.use('/lnk/be/user', user_router)
 
 app.use(error_handler)
 

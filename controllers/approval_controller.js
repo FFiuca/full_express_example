@@ -5,12 +5,12 @@ const {
     reject,
     create,
 } = require('../usecases/approval_usecase')
-const approval_validation  = require('../validations/approval_validation')
+const { request_approval_validation_rules }  = require('../validations/approval_validation')
 
 exports.create_approval = async (req, res, next)=>{
     console.log('sini1', req.user_id)
 
-    await Promise.all(approval_validation.request_approval_validation_rules.map(validation=> validation.run(req)))
+    await Promise.all(request_approval_validation_rules.map(validation=> validation.run(req)))
 
     const errors = validationResult(req)
     if (!errors.isEmpty()){

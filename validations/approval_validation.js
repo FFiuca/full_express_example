@@ -2,7 +2,7 @@ const { body } = require('express-validator');
 
 const request_approval_validation_rules = [
 //   body('user_id').isMongoId(),
-  body('request_reason').isString(),
+  body('request_reason').notEmpty().withMessage('Request reason is required'),
 ];
 
 const approve_request_validation_rules = [
