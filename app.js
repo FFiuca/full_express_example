@@ -1,19 +1,11 @@
-const dotenv = require('dotenv');
+const env = require('./configs/env')
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const guest_router = require('./routes/guest')
 const user_router = require('./routes/user')
 
-
-if (process.env.NODE_ENV == "test"){
-    dotenv.config({
-        path: './.env.test',
-    })
-}else{
-    dotenv.config()
-}
-console.log(process.env.NODE_ENV, process.env.MONGO_URI, process.env.MONGO_DB)
+const bootsrap = require('./core/bootsrap')
 
 const {error_handler} = require('./middlewares/error_middleware')
 
@@ -34,10 +26,5 @@ app.use('/lnk/be/guest', guest_router)
 app.use('/lnk/be/user', user_router)
 
 app.use(error_handler)
-
-const PORT = process.env.PORT || 3001
-app.listen(PORT, ()=>{
-    console.log(`Server running on port ${PORT}`)
-})
 
 module.exports = app

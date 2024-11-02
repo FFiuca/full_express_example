@@ -20,7 +20,7 @@ exports.create_user = async ({
     return user
 }
 
-const hash_password = async (password)=>{
+exports.hash_password = async (password)=>{
     return await bcrypt.hash(password, 10)
 }
 

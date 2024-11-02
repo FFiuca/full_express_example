@@ -5,6 +5,9 @@ const request = require("supertest");
 
 const _request =  request(app);
 
+afterAll(()=>{
+    mongoose.disconnect() // nevermind if async. jest will wait till it executed
+})
 
 describe("test", ()=>{
     it("just test", async()=>{
