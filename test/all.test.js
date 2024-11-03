@@ -10,7 +10,7 @@ afterAll(()=>{
 })
 
 describe("test", ()=>{
-    it("just test", async()=>{
+    test("just test", async()=>{
         expect(true).toEqual(true)
     })
 })

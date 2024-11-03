@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasMany(models.Approval, {
         foreignKey: 'user_id',
+        sourceKey: 'id',
         as : 'approval'
       })
     }

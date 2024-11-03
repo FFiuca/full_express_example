@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {auth_handler} = require('../middlewares/auth_middleware')
+const auth_handler = require('../middlewares/auth_middleware')
 const user_controller = require('../controllers/user_controller')
 const approval_controller = require('../controllers/approval_controller')
 

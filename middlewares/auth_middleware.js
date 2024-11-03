@@ -1,6 +1,6 @@
 const jwt =  require('jsonwebtoken');
 
-exports.auth_handler = (req, res, next)=>{
+const auth_handler = (req, res, next)=>{
     const token = req.headers['authorization']?.split(' ')[1]
     console.log('token', token)
     if (!token){
@@ -17,3 +17,5 @@ exports.auth_handler = (req, res, next)=>{
         next()
     })
 }
+
+module.exports = auth_handler

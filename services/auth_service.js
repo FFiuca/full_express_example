@@ -9,7 +9,7 @@ exports.create_user = async ({
     const newUser = new User({
         username,
         name,
-        password: await hash_password(password),
+        password: await this.hash_password(password), // to access var while it exported
         created_at: new Date(),
         updated_at: new Date(),
         status_active: true
