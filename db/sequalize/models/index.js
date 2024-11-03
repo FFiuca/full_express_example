@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 const fs = require('fs');
 const path = require('path');
@@ -36,6 +36,8 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
+
+// console.log('sequelize models index discovered', env, db)
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

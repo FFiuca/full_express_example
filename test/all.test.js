@@ -1,26 +1,55 @@
+// require('iconv-lite').encodingExists('foo')
 const app = require('../app');
 const mongoose = require('mongoose');
 const { faker } = require('@faker-js/faker');
 const request = require("supertest");
+const model = require('../db/sequalize/models');
+const before = require('./before_all')
+const sequelize =  require('../configs/db/sequalize_mysql')
+
 
 const _request =  request(app);
 
-afterAll(()=>{
-    mongoose.disconnect() // nevermind if async. jest will wait till it executed
+beforeAll(async ()=>{
+    // await sequelize.sync({ // not sync with migration
+    //     force: true
+    // })
+
+    // before.migration_drop()
+    // before.migration_db_create()
+    // before.migration_db_up()
+    // before.seed_master()
+
+    before.init()
 })
 
-describe("test", ()=>{
-    test("just test", async()=>{
+afterAll(()=>{
+    mongoose.disconnect() // nevermind if async. jest will wait till it executed
+    sequelize.close()
+})
+
+describe("yuhu", ()=>{
+    test("yoho", async()=>{
         expect(true).toEqual(true)
     })
 })
+
+// describe.only.each([
+//     [1, 1, 2], // => [a, b, expected]
+//     [1, 2, 3],
+//     [2, 1, 3],
+//   ])('.add(%i, %i)', (a, b, expected) => {
+//     test(`returns ${expected}`, async () => {
+//       expect(a + b).toBe(expected);
+//     });
+//   });
 
 let token = ''
 
 describe('test auth user positive', ()=>{
     let user = {}
     it('should create user and return user data', async ()=>{
-        const res = await _request.post('/lnk/be/guest/auth/register')
+        const res = await _request.post('/guest/auth/register')
                         .set('Content-Type', 'application/json')
                         .send({
                             username : faker.internet.userName(),
@@ -37,7 +66,7 @@ describe('test auth user positive', ()=>{
 
 
     it('should return 2* status code and token', async ()=>{
-        const res = await _request.post('/lnk/be/guest/auth/login')
+        const res = await _request.post('/guest/auth/login')
                         .set('Content-Type', 'application/json')
                         .send({
                             username : user.username,
@@ -53,7 +82,7 @@ describe('test auth user positive', ()=>{
 
 describe('test list employees positive', ()=>{
     it('should return list of employess', async()=>{
-        const res = await _request.get('/lnk/be/user/user/')
+        const res = await _request.get('/user/user/')
                         .set('Content-Type', 'application/json')
                         .set('Authorization', `Bearer ${token}`)
                         .send()
@@ -68,7 +97,7 @@ describe('test list employees positive', ()=>{
 describe('test create and approve approval', ()=>{
     let approval = {}
     it('should return  2* status code and approval data', async ()=>{
-        const  res = await _request.post('/lnk/be/user/approval')
+        const  res = await _request.post('/user/approval')
                             .set('Content-Type', 'application/json')
                             .set('Authorization', `Bearer ${token}`)
                             .send({
@@ -82,7 +111,7 @@ describe('test create and approve approval', ()=>{
     })
 
     it('should return 2* and data approved', async()=>{
-        const res = await _request.patch(`/lnk/be/user/approval/${approval._id}/approve`)
+        const res = await _request.patch(`/user/approval/${approval._id}/approve`)
                             .set('Content-Type', 'application/json')
                             .set('Authorization', `Bearer ${token}`)
                             .send()
@@ -95,7 +124,7 @@ describe('test create and approve approval', ()=>{
 describe('test create and reject approval', ()=>{
     let approval = {}
     it('should return  2* status code and approval data', async ()=>{
-        const  res = await _request.post('/lnk/be/user/approval')
+        const  res = await _request.post('/user/approval')
                             .set('Content-Type', 'application/json')
                             .set('Authorization', `Bearer ${token}`)
                             .send({
@@ -109,7 +138,7 @@ describe('test create and reject approval', ()=>{
     })
 
     it('should return 2* and data reject', async()=>{
-        const res = await _request.patch(`/lnk/be/user/approval/${approval._id}/reject`)
+        const res = await _request.patch(`/user/approval/${approval._id}/reject`)
                             .set('Content-Type', 'application/json')
                             .set('Authorization', `Bearer ${token}`)
                             .send()
@@ -121,7 +150,7 @@ describe('test create and reject approval', ()=>{
 
 describe('list all  approval', ()=>{
     it('shoul return list of approval', async()=>{
-        const res = await _request.get(`/lnk/be/user/approval`)
+        const res = await _request.get(`/user/approval`)
                             .set('Authorization', `Bearer ${token}`)
                             .send()
 

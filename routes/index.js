@@ -4,7 +4,7 @@ const router = express.Router()
 const guest = require('./guest')
 const user = require('./user')
 
-const middleware = require('./../middlewares')
+const middleware = require('../middlewares')
 const provider = require('../middlewares/providers')
 
 if(Array.isArray(provider.before)){

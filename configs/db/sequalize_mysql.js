@@ -6,7 +6,7 @@ const host = process.env.MYSQL_HOST
 const port = process.env.MYSQL_PORT
 const database = process.env.MYSQL_DB
 
-console.log('sequelize',user, password, host, database)
+console.log('sequelize',user, password, host, database, port)
 const sequelize = new Sequelize(`mysql://${user}:${password}@${host}:${port}/${database}`)
 
 async function test_connect(){
