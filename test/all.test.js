@@ -1,11 +1,13 @@
 // require('iconv-lite').encodingExists('foo')
 const app = require('../app');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const { faker } = require('@faker-js/faker');
 const request = require("supertest");
 const model = require('../db/sequalize/models');
 const before = require('./before_all')
-const sequelize =  require('../configs/db/sequalize_mysql')
+const after = require('./after_all')
+// const sequelize =  require('../configs/db/sequalize_mysql')
+
 
 
 const _request =  request(app);
@@ -24,8 +26,7 @@ beforeAll(async ()=>{
 })
 
 afterAll(()=>{
-    mongoose.disconnect() // nevermind if async. jest will wait till it executed
-    sequelize.close()
+    after.init()
 })
 
 describe("yuhu", ()=>{

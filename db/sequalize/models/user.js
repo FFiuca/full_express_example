@@ -10,10 +10,31 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      // one to many
       User.hasMany(models.Approval, {
         foreignKey: 'user_id',
         sourceKey: 'id',
         as : 'approval'
+      })
+
+      User.hasMany(models.ApprovalComment, {
+        foreignKey: 'user_id',
+        sourceKey: 'id',
+        as : 'approval_comment'
+      })
+
+      // many to many
+      User.belongsToMany(models.Approval, {
+        through: models.ApprovalUser,
+        as: 'approval_user',
+        foreignKey: 'user_id',
+        otherKey: 'approval_id', // referenced table
+        targetKey: 'id', // id for approval table
+        sourceKey: 'id', // id for user table
+        scope: {
+          // status: 'active'
+        }, // like where. can use polymorph or additional where params
+        // hooks: true // activate like observer laravel
       })
     }
   }

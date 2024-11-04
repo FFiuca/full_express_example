@@ -15,6 +15,21 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'id',
         as: 'user'
       })
+      Approval.hasMany(models.ApprovalComment, {
+        foreignKey: 'approval_id',
+        sourceKey: 'id',
+        as:  'approval_comment',
+      })
+
+      // many to many
+      Approval.belongsToMany(models.User, {
+        through: models.ApprovalUser,
+        sourceKey: 'id', // this table
+        targetKey: 'id', // related table
+        foreignKey: 'approval_id',
+        otherKey: 'user_id', // pivot constraint approval table
+        as: 'approval_user'
+      })
     }
   }
   Approval.init({
@@ -30,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: true,
       defaultValue: null
-    }
+    },
   }, {
     sequelize,
     modelName: 'Approval',

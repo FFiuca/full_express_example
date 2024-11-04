@@ -20,3 +20,6 @@ npx sequelize-cli db:seed:undo:all
 # cli node js
 # if you have run script in your package.json and want by pass when you run in terminal. just use : npx jest
 
+# test
+# for mongoose, it is auto migrate when you invoke the model. so doesn't need to  run migrate command like sequelize.
+
