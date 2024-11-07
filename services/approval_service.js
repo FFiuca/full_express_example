@@ -1,4 +1,5 @@
 const Approval = require('../models/approval_model')
+const mongoose = require('mongoose')
 
 exports.create_approval = async(user_id, {
     request_reason
@@ -13,12 +14,17 @@ exports.create_approval = async(user_id, {
 }
 
 exports.approve_approval = async(id)=>{
+    const session = await mongoose.startSession()
+    session.startTransaction()
+
     const approval = await Approval.findById(id)
 
     approval.status = 'approved'
     approval.updated_at = Date.now()
 
     await approval.save()
+    await session.commitTransaction()
+
     return approval
 }
 

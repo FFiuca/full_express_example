@@ -1,4 +1,4 @@
-const env = require('./configs/env')
+// const env = require('./configs/env')
 const express = require('express')
 const cors = require('cors')
 const guest_router = require('./routes/guest')

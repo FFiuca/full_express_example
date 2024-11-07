@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const User = require('./user_model')
 
 const approvalSchema = new  mongoose.Schema({
     user : {
@@ -15,12 +16,23 @@ const approvalSchema = new  mongoose.Schema({
         type: String,
         required: true
     },
+    comments : {
+        type: Array,
+        default: null,
+    },
+    dump_data : {
+        type : Map,
+        of: mongoose.Schema.Types.Mixed
+    },
+    dummy2: {
+        type : [{ type: mongoose.Schema.Types.ObjectId, ref: User}]
+    },
     created_at : {
-        type:Date,
+        type: Date,
         default: Date.now
     },
     updated_at : {
-        type:Date,
+        type: Date,
         default: null
     }
 })

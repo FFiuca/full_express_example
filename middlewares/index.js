@@ -1,3 +1,5 @@
+// this is to register all middleware
+
 const error_handler = require('./error_middleware')
 
 const before = []

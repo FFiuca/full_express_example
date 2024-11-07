@@ -1,5 +1,5 @@
 // require('iconv-lite').encodingExists('foo')
-const app = require('../app');
+const app = require('../app.js');
 // const mongoose = require('mongoose');
 const { faker } = require('@faker-js/faker');
 const request = require("supertest");

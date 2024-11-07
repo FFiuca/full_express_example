@@ -23,3 +23,13 @@ npx sequelize-cli db:seed:undo:all
 # test
 # for mongoose, it is auto migrate when you invoke the model. so doesn't need to  run migrate command like sequelize.
 
+## note
+# 1. to change TZ in node js. just set TZ in your process.env.TZ. in windows you can get easy by cross-env plugin
+# 2. i think the best way to structurizing mongoddb is like sql. use normalization and denormalization in good place. embedded doc gain more powerfull perfromance but less integrity and give more redundant and sizes. for relationship is making less for read performace than embedded.
+## end note
+
+##
+# 1. $unwind : gunanya untuk memecah  array menjadi array baru yang berisi satu elemen saja. hasil akhirnya bisa kaya select * from detail inner join master. jadi povnya dari detail. tapi pakainya harus bijak, terkadangan bisa malah kaya kombinasi
+# 2. agregate pass array and execute one by one from beginning
+# 3.
+##

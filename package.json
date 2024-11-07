@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --detectOpenHandles --testTimeout=10000",
+    "test": "cross-env NODE_ENV=test TZ='Asia/Jakarta' jest --detectOpenHandles --testTimeout=10000",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "cross-env TZ='Asia/Jakarta' nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -26,8 +26,10 @@
     "mongodb": "^6.10.0",
     "mongoose": "^8.7.2",
     "mongosh": "^2.3.3",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.11.3",
-    "sequelize": "^6.37.5"
+    "sequelize": "^6.37.5",
+    "tzdata": "^1.0.42"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
