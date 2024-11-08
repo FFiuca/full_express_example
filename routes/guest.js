@@ -54,8 +54,9 @@ router.post('/file/upload/multi3', cpUpload2, function(req, res, next){
 
 const cpUpload3 = new_multer(false)
 router.post('/file/upload/multi4', cpUpload3, function(req, res, next){
-    console.log(req.file, req.files)
-
+    // console.log(req.file, req.files)
+    // return next('some error')
+    // throw new Error('test')
     res.sendStatus(200)
 })
 
