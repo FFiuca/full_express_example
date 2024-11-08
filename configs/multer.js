@@ -9,13 +9,13 @@ const settings  = require('./settings')
 
 exports.new_multer = (
     single=false,
-    fields=[{name:"file", maxCount:10}], // string fieldname : avatar
+    fields=[{name:'files', maxCount:10}], // string fieldname : avatar
     limits={
         fileSize: 1024 * 1024 * 2 // 2MB
     },
     relative_path='uploads/',
     add_date_path=true,
-    accept_filetypes= /jpeg|jpg|png/, // regex
+    accept_filetypes= /jpeg|jpg|png|vsdx/, // regex
     preserve_path=false,
 ) => {
     const build_dir = ()=>{
@@ -41,7 +41,7 @@ exports.new_multer = (
 
     const storage = multer.diskStorage({
         destination: async (req, file, cb) => {
-            // console.log('[multer destination api]', req, file)
+            // console.log('[multer destination api]', file)
 
             // build  dir
             const p = dir.absolute
@@ -55,9 +55,10 @@ exports.new_multer = (
             }
 
             cb(null, p)
+            // console.log('[multer destination api]')
         },
         filename:  (req, file, cb) => {
-            console.log('[multer filename api]', file)
+            // console.log('[multer filename api]', file)
             const ext = path.extname(file.originalname)
 
             const original_name =  file.originalname.replace(ext, '') + Date.now().toString() + Math.random().toString()
@@ -68,6 +69,7 @@ exports.new_multer = (
 
 
             cb(null, filename)
+            // console.log('[multer filename api done]')
         }
     })
 
@@ -77,11 +79,12 @@ exports.new_multer = (
         const check_ext = accept_filetypes.test(ext)
 
         // check mime/type
-        const mime = file.mimetype
-        const check_mime = accept_filetypes.test(mime)
+        // const mime = file.mimetype
+        // const check_mime = accept_filetypes.test(mime)
 
-        if (!check_mime ||  !check_ext)
-            return cb(null, false)
+        if (!check_ext)
+            // return cb(null, false)
+            return cb('ext not allowed')
 
         cb(null, true)
     }
@@ -91,16 +94,21 @@ exports.new_multer = (
         storage: storage,
         limits: limits,
         fileFilter: function(req, file, cb){
-            // console.log('[multer fileFilter api]', req, file)
+            console.log('[multer fileFilter api]', file)
             check_file_filter(file, cb)
+            console.log('[multer fileFilter api done]')
         },
         preservePath: preserve_path
     })
     if(single)
         build = build.single(fields)
-    else
-        build = build.array(fields)
-    console.log('[new_multer]', build)
+    else{
+        // console.log('masuk fields')
+        // build = build.array(fields.name,  fields.maxCount)
+        build = build.fields(fields)
+
+    }
+    // console.log('[new_multer]', build)
     return build
 }
 
