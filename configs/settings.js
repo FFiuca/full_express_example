@@ -10,5 +10,5 @@ module.exports = {
     static_root_relative:  'storages',
 
     project_url : '',
-    static_url : '',
+    static_url : '/static',
 }

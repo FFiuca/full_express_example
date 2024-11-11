@@ -2,11 +2,17 @@
 
 const express = require('express')
 const cors = require('cors')
+const response_time = require('response-time')
+const compression = require('compression')
+const morgan = require('../../configs/morgan')
 
 // register your provider here
 const before = [
     cors(),
-    express.json()
+    express.json(),
+    response_time(),
+    compression(),
+    morgan(),
 ]
 
 const after = [

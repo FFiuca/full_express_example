@@ -22,7 +22,7 @@ router.post('/auth/login', auth_controller.login)
 // App.use('/auth', auth_router)
 
 // serve static files
-router.use('/static', express.static('storages/'))
+// router.use('/static', express.static('storages/'))
 
 const upload = multer({dest:'storages/'})
 router.post('/file/upload', upload.single('avatar'), function(req, res, next){
@@ -57,6 +57,9 @@ router.post('/file/upload/multi4', cpUpload3, function(req, res, next){
     // console.log(req.file, req.files)
     // return next('some error')
     // throw new Error('test')
+    setTimeout(()=>{
+        console.log('test worker')
+    }, 2000)
     res.sendStatus(200)
 })
 

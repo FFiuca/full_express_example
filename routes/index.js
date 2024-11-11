@@ -2,6 +2,7 @@
 
 const express = require('express')
 const router = express.Router()
+const settings = require('../configs/settings')
 
 const guest = require('./guest')
 const user = require('./user')
@@ -23,6 +24,8 @@ if(Array.isArray(middleware.after)){
 
 router.use('/guest', guest)
 router.use('/user', user)
+
+router.use(settings.static_url,  express.static(settings.static_root_relative))
 
 if (Array.isArray(middleware.before)){
     middleware.before.forEach(el=>{
