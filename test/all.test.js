@@ -8,8 +8,6 @@ const before = require('./before_all')
 const after = require('./after_all')
 // const sequelize =  require('../configs/db/sequalize_mysql')
 
-
-
 const _request =  request(app);
 
 beforeAll(async ()=>{
