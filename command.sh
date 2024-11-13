@@ -31,5 +31,5 @@ npx sequelize-cli db:seed:undo:all
 ##
 # 1. $unwind : gunanya untuk memecah  array menjadi array baru yang berisi satu elemen saja. hasil akhirnya bisa kaya select * from detail inner join master. jadi povnya dari detail. tapi pakainya harus bijak, terkadangan bisa malah kaya kombinasi
 # 2. agregate pass array and execute one by one from beginning
-# 3.
+# 3. jest mock : https://medium.com/@rickhanlonii/understanding-jest-mocks-f0046c68e53c
 ##
